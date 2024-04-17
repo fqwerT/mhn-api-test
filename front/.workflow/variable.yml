@@ -1,0 +1,24 @@
+variables:
+  # image and build
+  IMAGE_CLI: "harbor.lan/docker-base/docker-base-helm:1.1.0"
+  DOCKER_SERVICE_VERSION: 20.10-dind
+  BUILD_IMAGE: docker:${DOCKER_SERVICE_VERSION}
+  IMAGE_TEST: "node:18-alpine"
+
+  # app settings
+  APP_NAME: mechanotronics
+  MICROSERVICE: frontend
+  IMAGE_NAME_BASE: '${APP_NAME}-${MICROSERVICE}' # name image build
+  SERVICENAME: '${APP_NAME}-${MICROSERVICE}' # helm name
+
+  # deploy settings
+  HELM_REPO: "https://git:${HELM_ACCESS_TOKEN}@gitlab.lan/devops/helm.git"
+  HELM_REF: "2.0.14"
+  HELM_PATH: "csharp"
+  # git branches
+  MASTER_BRANCH: master
+  DEVELOPMENT_BRANCH: dev
+  DEVOPS_BRANCH: feature/ci-job
+  # k8s namespaces
+  NAMESPACE_DEVELOPMENT: develop
+  NAMESPACE_PRODUCTION: prod

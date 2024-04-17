@@ -1,0 +1,13 @@
+include:
+  - local: '/.workflow/stages.yml'
+  - local: '/.workflow/variable.yml'
+  - local: '/.workflow/deploy.yml'
+  - project: 'devops/ci-template'
+    ref: "2.0.0"
+    file: '/template/build.yaml'
+  - project: 'devops/ci-template'
+    ref: "2.0.0"
+    file: '/template/deploy.yaml'
+  - project: 'devops/ci-template'
+    ref: "2.0.0"
+    file: '/template/test.yaml'

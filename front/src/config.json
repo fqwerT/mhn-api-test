@@ -1,0 +1,9 @@
+
+
+{
+
+    "KEYCLOAK_BASE_URL": "http://keycloak-dev.lan/auth",
+    "KEYCLOAK_REALM": "freeipa-realm",
+    "KEYCLOAK_CLIENT_ID": "mechanotronics"
+}
+

@@ -1,0 +1,38 @@
+.prepare_deploy: &prepare_deploy
+  before_script: 
+    - >
+      git config --global http.sslVerify false &&
+      git clone ${HELM_REPO} && cd helm && git checkout ${HELM_REF}
+
+Build and Publish:
+  extends: .build_template
+  resource_group: development
+  variables:
+    ENVIRONMENT: $CI_COMMIT_BRANCH
+    # EXTERNAL_COMMAND: "--build-arg ENVIRONMENT=${CI_COMMIT_BRANCH}"
+    DOCKER_BUILDKIT: "0"
+    COMPOSE_DOCKER_CLI_BUILD: "0"
+    TAG_NAME: ${CI_COMMIT_SHORT_SHA}
+    IMAGE_NAME: "${IMAGE_NAME_BASE}-${CI_COMMIT_BRANCH}"
+  only:
+    variables:
+        # - $CI_COMMIT_BRANCH == $MASTER_BRANCH
+        - $CI_COMMIT_BRANCH == $DEVELOPMENT_BRANCH
+        - $CI_COMMIT_BRANCH == $DEVOPS_BRANCH
+
+Deploy to Development:
+  extends: .deploy_universal_template
+  resource_group: development
+  <<: *prepare_deploy
+  variables:
+    NAMESPACE: $NAMESPACE_DEVELOPMENT
+    ENVIRONMENT: $CI_COMMIT_BRANCH
+    TAG_NAME: ${CI_COMMIT_SHORT_SHA}
+    IMAGE_NAME: "${IMAGE_NAME_BASE}-${CI_COMMIT_BRANCH}"
+    EXTERNAL_COMMAND: "--values ../.Helm/values-${NAMESPACE_DEVELOPMENT}.yaml"
+  dependencies:
+    - Build and Publish
+  only:
+    variables:
+        - $CI_COMMIT_BRANCH == $DEVELOPMENT_BRANCH
+        - $CI_COMMIT_BRANCH == $DEVOPS_BRANCH
