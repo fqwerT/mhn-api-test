@@ -59,13 +59,17 @@ export const Table: React.FC = (): React.JSX.Element => {
             }}
             rowHeaders={true}
             manualColumnMove={true}
+            
             copyPaste={true}
-            height="70%"
+            height="auto"
             width="100%"
             licenseKey="non-commercial-and-evaluation"
             filters={true}
             dropdownMenu={true}
             manualColumnResize={true}
+            manualRowResize={true}
+            autoWrapRow={true}
+            autoWrapCol={true}
             afterRenderer={(TD, row, col, prop, value, cellProperties) => {
               TD.setAttribute("data-cellId", `${row}`);
               TD.addEventListener("click", (e) =>
