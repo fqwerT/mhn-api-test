@@ -12,8 +12,8 @@ export const TableTabs: React.FC<TableTabsProps> = memo(
       return (
         <S.StyledTabs>
           {data &&
-            data.map((item: string,index:number) => (
-              <Button onClick={() => handleSetTab(item)} variant="outlined" key={index}>
+            data.map((item: string, index: number) => (
+              <Button onClick={() => handleSetTab(item)} key={index}>
                 {item}
               </Button>
             ))}
@@ -27,17 +27,16 @@ export const TableTabs: React.FC<TableTabsProps> = memo(
   }
 );
 
-
-    // return (
-    //   <S.StyledTabs>
-    //     {/* {data ? (
-    //       data.map((item: string) => (
-    //         <Button onClick={() => handleSetTab(item)} variant="outlined">
-    //           {item}
-    //         </Button>
-    //       ))
-    //     ) : (
-    //       <></>
-    //     )} */}
-    //   </S.StyledTabs>
-    // );
+// return (
+//   <S.StyledTabs>
+//     {/* {data ? (
+//       data.map((item: string) => (
+//         <Button onClick={() => handleSetTab(item)} variant="outlined">
+//           {item}
+//         </Button>
+//       ))
+//     ) : (
+//       <></>
+//     )} */}
+//   </S.StyledTabs>
+// );

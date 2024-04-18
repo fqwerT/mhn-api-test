@@ -1,8 +1,4 @@
-import React, {
-  useRef,
-  useCallback,
-  useState,
-} from "react";
+import React, { useRef, useCallback, useState } from "react";
 import { HotTable } from "@handsontable/react";
 import { registerAllModules } from "handsontable/registry";
 import "handsontable/dist/handsontable.full.min.css";
@@ -17,6 +13,7 @@ import { useContext } from "react";
 import { MyContext } from "../DataProvider/DataProvider";
 import { handleDownloadFile } from "./utils";
 import { TableTabs } from "../TableTabs/TableTabs";
+import { CellSearch } from "../CellSearch/CellSearch";
 
 registerAllModules();
 
@@ -35,15 +32,16 @@ export const Table: React.FC = (): React.JSX.Element => {
   };
 
   const exportFile = useCallback(() => {
-    handleDownloadFile(data.data,data.tabs);
+    handleDownloadFile(data.data, data.tabs);
   }, [data]);
 
   const handleSetTab = (item: string) => {
     setTab(item);
   };
-  console.log(data)
+  console.log(data);
   return (
     <StyledDashboardWrap>
+      <CellSearch />
       <TableTabs data={data?.tabs} handleSetTab={handleSetTab} />
       {tab && (
         <>
@@ -59,7 +57,6 @@ export const Table: React.FC = (): React.JSX.Element => {
             }}
             rowHeaders={true}
             manualColumnMove={true}
-            
             copyPaste={true}
             height="auto"
             width="100%"
@@ -114,10 +111,12 @@ export const Table: React.FC = (): React.JSX.Element => {
   /* В файле  пустых строк, данных со значением 0 - 17, 5 ячеек с
           пустыми значениями */
 }
-      {/* <S.StyledInfoHeader>
+{
+  /* <S.StyledInfoHeader>
         {show && (
           <Alert severity="error">
             Текущую ячейку - {id} редактирует другой пользователь
           </Alert>
         )}
-      </S.StyledInfoHeader> */}
+      </S.StyledInfoHeader> */
+}

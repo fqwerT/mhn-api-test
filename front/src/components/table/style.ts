@@ -10,6 +10,7 @@ export const StyledExportWrap = styled.section`
 
 export const StyledButtonsContainer = styled(StyledExportWrap)`
   flex-direction: row;
+  padding-top: 15px;
 `;
 
 export const StyledInfoHeader = styled.section`

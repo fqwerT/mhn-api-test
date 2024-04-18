@@ -50,9 +50,10 @@ app.post("/parse", (req: Request, res: Response) => {
           if (element === 0) {
             cellValueZero++;
           }
-
           if (typeof element === "string" && element.includes("#ERROR!")) {
             errorCells++;
+            //  return { ...item, element: " " };
+            console.log(item);
           }
         });
       });
@@ -63,11 +64,51 @@ app.post("/parse", (req: Request, res: Response) => {
       tabs: tabs,
       cellvaluezero: cellValueZero,
       errorCells: errorCells,
-      status:200
+      status: 200,
     };
     res.status(200).json(responsePayload);
   } catch (e) {
     //@ts-ignore
-    res.status(400).json({ error: e.message,status:400 });
+    res.status(400).json({ error: e.message, status: 400 });
+  }
+});
+
+app.post("/cellcontent", (req: Request, res: Response) => {
+  try {
+    // const searchValue: string | number = req.body.searchValue;
+    // const parsedData = new Uint8Array(Object.values(req.body.data));
+    // const workbook = XLSX.read(parsedData, { type: "buffer" });
+    // const jsonData = {};
+    // //@ts-ignore
+    // workbook.SheetNames.forEach((sheetName) => {
+    //   const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+    //   //@ts-ignore
+    //   jsonData[sheetName] = data;
+    // });
+    const searchValue: string | number = req.body.searchValue;
+    const tabs = Object.keys(req.body.data);
+    const jsonTable = req.body.data;
+    let foundedValue: string[] | number[] = [];
+
+    tabs.forEach((item) => {
+      //@ts-ignore
+      jsonTable[item].forEach((item) => {
+        Object.values(item).forEach((element: any) => {
+          //@ts-ignore
+          if (String(element[0]).includes(String(searchValue)[0])) {
+            //@ts-ignore
+            foundedValue.push(element);
+          }
+        });
+      });
+    });
+    const responsePayload = {
+      result: foundedValue.slice(0, 10),
+    };
+
+    res.status(200).json(responsePayload);
+  } catch (e) {
+    //@ts-ignore
+    res.status(400).json({ error: e.message, status: 400 });
   }
 });

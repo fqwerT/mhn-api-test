@@ -7,9 +7,9 @@ import { useAppDispatch } from "../../store/hooks";
 import { setName, setTable } from "../../store/table/table";
 import { FileUploader } from "../fileuploader/fileuploader";
 import { StyledButton } from "../ui/button/button";
-import SearchIcon from '@mui/icons-material/Search';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from "@mui/icons-material/Search";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
 export const TablesList: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -21,13 +21,19 @@ export const TablesList: React.FC = () => {
   return (
     <StyledDashboardWrap>
       <S.StyledTablesHeader>
-      <TextField id="outlined-basic" label="имя таблицы" variant="outlined"  size="small"   InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          ),
-        }}/>
+        <TextField
+          id="outlined-basic"
+          label="имя таблицы"
+          variant="outlined"
+          size="small"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
         <FileUploader />
       </S.StyledTablesHeader>
       <S.StyledTsblesMenu>
