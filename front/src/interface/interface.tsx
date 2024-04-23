@@ -14,3 +14,15 @@ export interface FileProps {
   type: string;
   webkitRelativePath: string;
 }
+
+export interface ColorsProps {
+  color: string;
+  id: number;
+}
+
+export interface StyleProps {
+  
+  fontSize: string | number | null;
+  fontWeight: number | null;
+  color: string | null;
+}

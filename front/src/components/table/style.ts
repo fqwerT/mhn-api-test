@@ -24,3 +24,9 @@ export const StyledInfoHeader = styled.section`
   justify-content: flex-start;
   margin-bottom: 10px;
 `;
+
+export const StyledFilters = styled.section`
+display:flex;
+flex-direction:row;
+
+`

@@ -43,7 +43,7 @@ export const CellSearch = () => {
   return (
     <S.StyledSearchCell>
       <Button startIcon={<SearchIcon />} onClick={() => setOpen(!open)}>
-        Поис значений
+        Поиск
       </Button>
       {open && (
         <S.StyledSearchWrap>
@@ -51,6 +51,7 @@ export const CellSearch = () => {
             onChange={(e) => handleSearch(e.target.value)}
             onKeyDown={(e) => handleSearchResult(e, "keyboard")}
             sx={{ width: "100%" }}
+            size="small"
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
