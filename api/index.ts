@@ -43,19 +43,19 @@ app.post("/parse", (req: Request, res: Response) => {
     let cellValueZero = 0;
     let errorCells = 0;
 
-    // tabs.forEach((item) => {
-    //   //@ts-ignore
-    //   jsonData[item].forEach((item) => {
-    //     Object.values(item).forEach((element: any) => {
-    //       if (element === 0) {
-    //         cellValueZero++;
-    //       }
-    //       if (typeof element === "string" && element.includes("#ERROR!")) {
-    //         errorCells++;
-    //       }
-    //     });
-    //   });
-    // });
+    tabs.forEach((item) => {
+      //@ts-ignore
+      jsonData[item].forEach((item) => {
+        Object.values(item).forEach((element: any) => {
+          if (element === 0) {
+            cellValueZero++;
+          }
+          if (typeof element === "string" && element.includes("#ERROR!")) {
+            errorCells++;
+          }
+        });
+      });
+    });
 
     // const JSONTable = tabs.map((item) => {
     //   //@ts-ignore
@@ -63,10 +63,10 @@ app.post("/parse", (req: Request, res: Response) => {
     //     return { ...item, id: uid() };
     //   });
     // });
-  //@ts-ignore
+    //@ts-ignore
     const arrayTypeTable = jsonData[tabs[0]].map((i) => {
-      return Object.values(i)
-    })
+      return Object.values(i);
+    });
 
     const responsePayload = {
       //@ts-ignore
@@ -92,14 +92,22 @@ app.post("/cellcontent", (req: Request, res: Response) => {
 
     tabs.forEach((item) => {
       //@ts-ignore
-      jsonTable[item].forEach((item) => {
-        Object.values(item).forEach((element: any) => {
-          //@ts-ignore
-          if (String(element[0]).includes(String(searchValue)[0])) {
+      jsonTable.forEach((item) => {
+        //@ts-ignore
+        item.forEach((i) => {
+          if (String(i[0]).includes(String(searchValue)[0])) {
             //@ts-ignore
-            foundedValue.push(element);
+            foundedValue.push(i);
           }
         });
+        // Object.values(item).forEach((element: any) => {
+        //   //@ts-ignore
+        //   if (String(element[0]).includes(String(searchValue)[0])) {
+        //     //@ts-ignore
+        //     foundedValue.push(element);
+        //     console.log(element);
+        //   }
+        // });
       });
     });
     const responsePayload = {
@@ -112,7 +120,6 @@ app.post("/cellcontent", (req: Request, res: Response) => {
     res.status(400).json({ error: e.message, status: 400 });
   }
 });
-
 
 app.post("/formula", (req: Request, res: Response) => {
   try {

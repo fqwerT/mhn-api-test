@@ -10,7 +10,11 @@ import { CellSearchResult } from "../CellSearchResult/CellSearchResult";
 import InputAdornment from "@mui/material/InputAdornment";
 import { useOutsideKlick } from "../../hooks/useOutsideKlick";
 
-export const CellSearch = () => {
+interface CellSearchProps {
+  func: (arg: string | number) => void;
+}
+
+export const CellSearch: React.FC<CellSearchProps> = ({ func }) => {
   const [value, setValue] = useState<string | null>(null);
   const { data, updateData } = useContext(MyContext);
   const [open, setOpen] = useState<boolean>(false);
@@ -54,7 +58,7 @@ export const CellSearch = () => {
             size="small"
             InputProps={{
               endAdornment: (
-                <InputAdornment position="end">
+                <InputAdornment position="end" sx={{ cursor: "pointer" }}>
                   <SearchIcon onClick={(e) => handleSearchResult(e, "mouse")} />
                 </InputAdornment>
               ),
@@ -64,7 +68,7 @@ export const CellSearch = () => {
           {result && result.length !== 0 && (
             <S.StyledCellSearchList ref={outsideClick}>
               {result.map((item: string | number, index: string | number) => (
-                <CellSearchResult data={item} key={index} />
+                <CellSearchResult data={item} key={index} func={func} />
               ))}
             </S.StyledCellSearchList>
           )}

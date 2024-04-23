@@ -3,12 +3,13 @@ import * as S from "./style";
 
 interface CellSearchResultProps {
   data: string | number;
+  func: (arg: string | number) => void;
 }
 
 export const CellSearchResult: React.FC<CellSearchResultProps> = memo(
-  ({ data }) => {
+  ({ data, func }) => {
     return (
-      <S.StyledSearchResult>
+      <S.StyledSearchResult onClick={() => func(data)}>
         <S.StyledResultTitle>{data}</S.StyledResultTitle>
       </S.StyledSearchResult>
     );

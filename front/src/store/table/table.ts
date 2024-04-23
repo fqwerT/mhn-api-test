@@ -6,16 +6,14 @@ import { ColorsProps } from "../../interface/interface";
 
 interface CellProps {
   col: string | number | null;
-    row: string | number | null;
-    styles: ColorsProps[] | null;
+  row: string | number | null;
+  styles: ColorsProps[] | null;
 }
 interface CounterState {
   data: TableType;
   name: string;
   uploadStatus: null | string;
-  cellStyle: CellProps[] | []
-    
-  
+  cellStyle: CellProps[] | [];
 }
 
 // Define the initial state using that type
@@ -41,13 +39,24 @@ export const tableSlice = createSlice({
       state.uploadStatus = action.payload;
     },
     setStyledCell: (state, action) => {
-      state.cellStyle = [...state.cellStyle,action.payload]
+      state.cellStyle = [...state.cellStyle, action.payload];
+    },
+    deleteLastChange: (state) => {
+      state.cellStyle =
+        !Array.isArray(state.cellStyle) || state.cellStyle.length === 0
+          ? state.cellStyle
+          : state.cellStyle.slice(0, -1);
     },
   },
 });
 
-export const { setTable, setName, setuploadStatus, setStyledCell } =
-  tableSlice.actions;
+export const {
+  setTable,
+  setName,
+  setuploadStatus,
+  setStyledCell,
+  deleteLastChange,
+} = tableSlice.actions;
 
 // // Other code such as selectors can use the imported `RootState` type
 // export const selectTable = (state: RootState) => state.table.data

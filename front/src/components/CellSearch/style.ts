@@ -12,6 +12,8 @@ export const StyledSearchCell = styled.section`
   gap: 10px;
   position: relative;
   padding-bottom: 15px;
+  background-color: white;
+  padding: 10px;
 `;
 
 export const StyledCellSearchList = styled.section`

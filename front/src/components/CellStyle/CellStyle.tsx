@@ -6,6 +6,7 @@ interface CellStyleProps {
 }
 
 export const CellStyle: React.FC<CellStyleProps> = memo(({ style }) => {
+  console.log(style);
   return (
     <style>
       {style.map(
@@ -14,6 +15,7 @@ export const CellStyle: React.FC<CellStyleProps> = memo(({ style }) => {
                      font-weight:${i.fontWeight}!important;
                      font-size:${i.fontSize}!important;
                      background-color:${i.color}!important;
+                     color:${i.text_color}!important;
                   }
                 `
       )}

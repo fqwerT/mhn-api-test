@@ -26,7 +26,9 @@ export const StyledInfoHeader = styled.section`
 `;
 
 export const StyledFilters = styled.section`
-display:flex;
-flex-direction:row;
-
-`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+  max-height: 230px;
+`;
